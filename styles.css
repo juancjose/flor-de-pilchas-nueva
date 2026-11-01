@@ -185,3 +185,6 @@ body.locked .fab{display:none}
 }
 @media(max-width:359px){.grid{grid-template-columns:1fr}.brand span{font-size:1.12rem}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.squiggle{stroke-dashoffset:0}}
+
+/* Contraste AA para precios en modo claro */
+:root:not([data-theme="dark"]) .price{color:#6f5218}

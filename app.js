@@ -12,6 +12,9 @@
     var m = String(u).match(OLD_HOST);
     if (m) u = "img/" + m[1];
     if (small && /^img\/.+\.webp$/.test(u) && !/\.w480\.webp$/.test(u)) u = u.replace(/\.webp$/, ".w480.webp");
+    // Fotos de Supabase: se redimensionan al vuelo con la optimización de imágenes de Vercel (no toca los archivos originales)
+    if (/^https:\/\/[a-z0-9]+\.supabase\.co\/storage\/v1\/object\/public\//.test(u) && /\.vercel\.app$/.test(location.hostname))
+      u = "/_vercel/image?url=" + encodeURIComponent(u) + "&w=" + (small ? 640 : 1080) + "&q=75";
     return u;
   }
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -65,7 +68,6 @@
     list.forEach(function (p, i) {
       var card = el("button", "card"); card.type = "button"; card.style.setProperty("--i", Math.min(i, 12));
       card.dataset.id = p.id;
-      card.setAttribute("aria-label", p.name + ", " + fmt(p.price) + (p.soldOut ? ", agotado" : ""));
       var box = el("div", "card__img");
       var srcs = p.images.slice(0, 2);
       if (srcs.length < 2 && p.colors[1] && p.colors[1].images[0]) srcs.push(p.colors[1].images[0]);
