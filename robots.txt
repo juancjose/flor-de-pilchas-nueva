@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://flordepilchas-nueva.vercel.app/sitemap.xml
